@@ -36,25 +36,25 @@ export const Login = () => {
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Level Up</h1>
-                    <h2>Please sign in</h2>
+                    <h1>BOOKWORM</h1>
+                    <h2>SIGN IN</h2>
                     <fieldset>
-                        <label htmlFor="inputUsername"> Username address </label>
-                        <input ref={username} type="username" id="username" className="form-control" placeholder="Username address" required autoFocus />
+                        <label htmlFor="inputUsername"> USERNAME </label>
+                        <input ref={username} type="username" id="username" className="form-control" placeholder="USERNAME" required autoFocus />
                     </fieldset>
                     <fieldset>
-                        <label htmlFor="inputPassword"> Password </label>
-                        <input ref={password} type="password" id="password" className="form-control" placeholder="Password" required />
+                        <label htmlFor="inputPassword"> PASSWORD </label>
+                        <input ref={password} type="password" id="password" className="form-control" placeholder="PASSWORD" required />
                     </fieldset>
                     <fieldset style={{
                         textAlign: "center"
                     }}>
-                        <button className="btn btn-1 btn-sep icon-send" type="submit">Sign In</button>
+                        <button className="btn btn-1 btn-sep icon-send" type="submit">LOGIN</button>
                     </fieldset>
                 </form>
             </section>
             <section className="link--register">
-                <Link to="/register">Not a member yet?</Link>
+                <Link to="/register">NOT A MEMBER YET?</Link>
             </section>
         </main>
     )
