@@ -3,3 +3,84 @@
     max-width: 300px;
     margin-left: 25px;
 }
+
+.btn-primary {
+    background-color: #233024;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #ffa200;
+}
+
+.bookList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.book {
+    width: 200px;
+    height: 300px;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #656c65;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    background: #656c65;
+    text-align: left;
+}
+
+.book__imageURL {
+    width: 200px;
+    height: 150px;
+    /* width: 100%; */
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.edit-book {
+    background-color: #9B2335;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 10px;
+    font-size: 9px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.edit-book:hover {
+    background-color: #ffa200;
+}
+
+.delete-book {
+    background-color: #9B2335;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 10px;
+    font-size: 9px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 10px;
+}
+.delete-book:hover {
+    background-color: #ff0000;
+}
+
+.edit-delete {
+    justify-content: center;
+    align-items: center;
+    margin-left: 0%;
+    /* margin-right: 20%; */
+
+}
