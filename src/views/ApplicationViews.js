@@ -5,6 +5,7 @@ import { Register } from "../components/auth/Register"
 import { Authorized } from "./Authorized"
 import { Home } from "../components/home/Home"
 import { BookList } from '../components/books/BookList';
+import { BookForm } from '../components/books/BookForm';
 
 
 
@@ -15,7 +16,12 @@ export const ApplicationViews = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route element={<Authorized />}>
-                <Route path="/" element={<BookList />} />
+                {/* <Route path="/" element={<EventList />} /> */}
+                <Route path="books" >
+                    <Route index element={<BookList />} />
+                    <Route path="new" element={<BookForm />} />
+                    {/* <Route path="edit/:bookId" element={<UpdateBook />} /> */}
+                </Route>
             </Route>
         </Routes>
     </>
