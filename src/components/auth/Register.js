@@ -70,7 +70,7 @@ export const Register = () => {
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="VERIFY PASSWORD" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="verifyPassword"> Verify Password </label>
+                    <label htmlFor="bio"> BIO </label>
                     <textarea ref={bio} name="bio" className="form-control" placeholder="Let other users know a little bit about you..." />
                 </fieldset>
                 <fieldset>
