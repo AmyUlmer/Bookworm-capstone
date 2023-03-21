@@ -76,7 +76,7 @@ export const BookForm = () => {
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="length">LENGTH: </label>
+                    <label htmlFor="length">NUMBER OF PAGES: </label>
                     <input type="text" name="length" required autoFocus className="form-control"
                         value={currentBook.length}
                         onChange={changeBookState}
@@ -89,6 +89,16 @@ export const BookForm = () => {
                     <label htmlFor="released_date">RELEASE DATE: </label>
                     <input type="date" name="released_date" required autoFocus className="form-control"
                         value={currentBook.released_date}
+                        onChange={changeBookState}
+                    />
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="image_url"> BOOK IMAGE URL: </label>
+                    <input type="text" name="image_url" required autoFocus className="form-control"
+                        value={currentBook.image_url}
                         onChange={changeBookState}
                     />
                 </div>

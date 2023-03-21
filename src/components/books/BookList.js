@@ -1,6 +1,15 @@
-import React, { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { deleteBook,getBooks } from "../../managers/BookManager.js"
+import * as React from 'react'
+import { useNavigate} from 'react-router-dom'
+import { useEffect, useState } from "react"
+import { deleteBook, getBooks } from "../../managers/BookManager.js"
+import Card from '@mui/material/Card'
+import Link from '@mui/material/Link'
+import CardContent from '@mui/material/CardContent'
+import Typography from '@mui/material/Typography'
+import CardMedia from '@mui/material/CardMedia'
+import Stack from '@mui/material/Stack'
+import Button from '@mui/material/Button'
+import styled from '@emotion/styled';
 import "./book.css"
 
 export const BookList = (props) => {
@@ -16,52 +25,54 @@ export const BookList = (props) => {
             image_url: ""
             }
         ])
+    
+        const navigate = useNavigate()
 
-    const navigate = useNavigate()
-
-    function refreshPage() {
-        window.location.reload(false)
-    }
+        function refreshPage() {
+            window.location.reload(false)
+        }
+    
+        const handleDelete = (id) => {
+            deleteBook(id).then(refreshPage)
+        } 
 
     useEffect(() => {
         getBooks().then(data => setBooks(data))
     }, [])
 
-    const handleDelete = (id) => {
-        deleteBook(id).then(refreshPage)
-    } 
+    return (
 
-
-return (
-        
-    <article className="bookList">
+        <article className="bookList">
         <button className="btn btn-2 icon-create"
             onClick={() => {
                 navigate({ pathname: "new" })
             }}
         >Add New Book</button>
         {
-            books.map(book => {
-                return <section key={`book--${book.id}`} className="book">
-                    <img src={`${book.image_url}`} alt="Book" className="book__imageURL"></img>
-                    <div className="book__title">TITLE:{book.title}</div>
-                    <div className="book__author">AUTHOR:{book.author}</div>
-                    <div className="book__genre">GENRE:{book.book_genre.label}</div>
-                    <div className="book__length">LENGTH:{book.length}</div>
-                    <div className="edit-delete">
-                        <button className="edit-book"
-                            onClick={() => {
-                                navigate({ pathname: `edit/${book.id}` })
-                                }}>Edit</button>
-                    </div>
-                    <div className="delete-book">
-                        <button
-                            onClick={() => {
-                                handleDelete(book.id)
-                            }}>Delete</button>
-                    </div>
-                </section>
-            })
+
+        books.map(book => {
+            return <Card key={`book-${book.id}`} className="book" sx={{ maxWidth: 300 }}>
+            <CardContent sx={{ textAlign: 'center' }}>
+                <Stack spacing={1}>
+                    <CardMedia
+                        component="img"
+                        height= "200"
+                        image={book?.image_url}
+                        title="image"
+                    />
+                    <Link className="card-link" href={`/books/details/${book.id}`} >{book.title}</Link>
+                    <Typography> Author: {book?.author} </Typography>
+                    <Typography> Genre: {book?.book_genre?.label}</Typography>
+                    <Stack direction="row" justifyContent="center">
+                        <Button className="button" variant="contained" onClick={() => {
+                            navigate(`edit/${book.id}`)
+                        }}>Edit</Button>
+                        <Button className="button" variant="contained" onClick={handleDelete}>Delete</Button>
+                    </Stack>
+                </Stack>
+            </CardContent>
+        </Card>
+    })
         }
     </article>
 )

@@ -7,8 +7,17 @@ export const getBooks = () => {
         .then(response => response.json())
 }
 
+export const getSingleBook= (id) => {
+    return fetch(`http://localhost:8000/books/${id}`, {
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("bw_token")}`
+        }
+    })
+    .then((res) => res.json())
+}
 
-export const createBook = (game) => {
+
+export const createBook = (book) => {
     return fetch("http://localhost:8000/books", {
         method: "POST",
         headers:{
@@ -16,7 +25,7 @@ export const createBook = (game) => {
             "Authorization": `Token ${localStorage.getItem("bw_token")}`,
             "Accept": "application/json"
         },
-        body: JSON.stringify(game)
+        body: JSON.stringify(book)
     })
         .then(response => response.json())
 }
