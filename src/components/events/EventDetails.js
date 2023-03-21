@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { deleteEvent, leaveEvent, joinEvent, getEvents } from "../../managers/EventManager.js"
+import { deleteEvent, leaveEvent, joinEvent, getSingleEvent } from "../../managers/EventManager.js"
 import "./event.css"
 
-export const EventList = (props) => {
+
+export const EventDetails = () => {
     const [ events, setEvents ] = useState([])
 
     const navigate = useNavigate()
@@ -12,9 +13,13 @@ export const EventList = (props) => {
         window.location.reload(false)
     }
 
+    const { eventId } = useParams()
+
+    const [event, setEvent] = useState({})
+
     useEffect(() => {
-        getEvents().then(data => setEvents(data))
-    }, [])
+        getSingleEvent(eventId).then((data) => setEvent(data))
+    }, [eventId])
 
     const handleClick = (id) => {
         deleteEvent(id).then(refreshPage)
@@ -32,10 +37,10 @@ export const EventList = (props) => {
                     return <section key={`event--${event.id}`} className="event">
                         
                         <img src={`${event.image_url}`} alt="Event" className="event__imageURL"></img>
-                        <div className="event__name">Name: {event.event_name}</div>
-                        <div className="event__game">Book: {event.book.title}</div>
+                        <div className="event__name">{event.name}</div>
+                        <div className="event__book">{event.book.title}</div>
                         <div className="event_location">Location: {event.location}</div>
-                        <div className="event_date">Date: {event.date_of_event} at {event.start_time}</div>
+                        <div className="event_date">Date: {event.date_of_event} from {event.start_time} to {event.end_time} </div>
                         <div className="event__organizer">Event Organizer: {event.organizing_reader.full_name}</div>
                         <div className="event__footer">
                             <button className="btn btn-2 btn-sep icon-create"
@@ -74,12 +79,3 @@ export const EventList = (props) => {
         </article>
     )
 }
-
-
-
-
-
-
-
-
-
