@@ -50,7 +50,7 @@ export const getBookById = (id) => {
 }
 
 export const updateBook = (book, id) => {
-    return fetch(`http://localhost:8000/games/${id}`, {
+    return fetch(`http://localhost:8000/books/${id}`, {
         method: "PUT",
         headers:{
             "Content-Type": "application/json",

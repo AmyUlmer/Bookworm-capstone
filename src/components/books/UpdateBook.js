@@ -11,7 +11,12 @@ import { getBookById, getBookGenres, updateBook } from '../../managers/BookManag
 
 export const UpdateBook = () => {
     const navigate = useNavigate()
-    const [bookGenres, setBookGenres] = useState([])
+    const [bookGenres, setBookGenres] = useState([
+        {
+            id: 0
+        } 
+    ])
+
     const { bookId } = useParams()
 
     /*
@@ -23,7 +28,7 @@ export const UpdateBook = () => {
         author: "",
         title: "",
         released_date: "",
-        length: 0,
+        length: "",
         description: "",
         book_genre: {},
         reader:{},
@@ -76,10 +81,10 @@ export const UpdateBook = () => {
                 <div className="form-group">
                 <label className="label">EDIT GENRE: </label>
                 <select
-                        name="book_genre"
+                        name="label"
                         className="form-control"
-                        placeholder={currentBook.book_genre}
-                        defaultValue={currentBook.book_genre}
+                        
+                        value={currentBook.book_genre.id}
                         onChange={(event) => {
                             const copy = { ...currentBook }
                             copy.book_genre = parseInt(event.target.value)
@@ -95,7 +100,7 @@ export const UpdateBook = () => {
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="length">EDIT NUMBER OF PAGES: </label>
+                    <label htmlFor="length">EDIT LENGTH: </label>
                     <input type="text" name="length" required autoFocus className="form-control"
                         placeholder={currentBook.length}
                         defaultValue={currentBook.length}
@@ -117,11 +122,24 @@ export const UpdateBook = () => {
 
             <fieldset>
                 <div className="form-group">
+                    <label htmlFor="description">EDIT DESCRIPTION: </label>
+                    <textarea name="description" required autoFocus className="form-control"
+                        placeholder={currentBook.description}
+                        defaultValue={currentBook.description}
+                        onChange={changeBookState}
+                        rows="5"
+                    />
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div className="form-group">
                     <label htmlFor="image_url">EDIT BOOK IMAGE URL: </label>
                     <input type="text" name="image_url" required autoFocus className="form-control"
                         placeholder={currentBook.image_url}
                         defaultValue={currentBook.image_url}
                         onChange={changeBookState}
+                        style={{ height: '100px' }}
                     />
                 </div>
             </fieldset>

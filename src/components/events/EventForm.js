@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { createEvent} from '../../managers/EventManager.js'
 import { getBooks } from "../../managers/BookManager"
 
+
 export const EventForm = () => {
     const navigate = useNavigate()
     const [books, setBooks] = useState([])
@@ -15,14 +16,14 @@ export const EventForm = () => {
             start_time: 0,
             end_time: "",
             max_capacity: 0,
-            book: {},
-            organizing_reader:{},
+            book: 0,
+            organizing_reader:"",
             image_url: ""
             
     })
 
     useEffect(() => {
-        // TODO: Get the games, then set the state
+        // TODO: Get the books, then set the state
         getBooks().then(res => setBooks(res))
     }, [])
 
@@ -36,14 +37,35 @@ export const EventForm = () => {
 
     return (
         <form className="eventForm">
-            <h2 className="eventForm__title">Register New Book</h2>
+            <h2 className="eventForm__title">Register New Event</h2>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="title">EVENT NAME: </label>
-                    <input type="text" name="name" required autoFocus className="form-control"
+                    <label htmlFor="event_name">EVENT: </label>
+                    <input type="text" name="event_name" required autoFocus className="form-control"
                         value={currentEvent.event_name}
                         onChange={changeEventState}
                     />
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div className="form-group">
+                    <label className="label">Book: </label>
+                        <select
+                                name="book"
+                                className="form-control"
+                                defaultValue={currentEvent.book}
+                                onChange={(event) => {
+                                    const copy = { ...currentEvent }
+                                    copy.book = parseInt(event.target.value)
+                                    setCurrentEvent(copy)
+                                }}>
+                                <option value="0">Please Choose Book</option>
+                                {books.map(book => ( 
+                                            <option key={`book--${book.id}`} value={book.id} name={book.title}>{book.title}</option>                         
+                                    ))}
+                        </select>
+                        Not what you're looking for? <a href="/books/new" className="add-book-link">Add a book</a>
                 </div>
             </fieldset>
 
@@ -59,30 +81,51 @@ export const EventForm = () => {
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="length">DATE: </label>
-                    <input type="text" name="length" required autoFocus className="form-control"
-                        value={currentBook.length}
-                        onChange={changeBookState}
+                    <label htmlFor="date">DATE: </label>
+                    <input type="date" name="date_of_event" required autoFocus className="form-control"
+                        value={currentEvent.date_of_event}
+                        onChange={changeEventState}
                     />
                 </div>
             </fieldset>
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="released_date">RELEASE DATE: </label>
-                    <input type="date" name="released_date" required autoFocus className="form-control"
-                        value={currentBook.released_date}
-                        onChange={changeBookState}
+                    <label htmlFor="start_time">START TIME: </label>
+                    <input type="time" name="start_time" required autoFocus className="form-control"
+                        value={currentEvent.start_time}
+                        onChange={changeEventState}
                     />
                 </div>
             </fieldset>
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="image_url"> BOOK IMAGE URL: </label>
-                    <input type="text" name="image_url" required autoFocus className="form-control"
-                        value={currentBook.image_url}
-                        onChange={changeBookState}
+                    <label htmlFor="end_time">END TIME: </label>
+                    <input type="time" name="end_time" required autoFocus className="form-control"
+                        value={currentEvent.end_time}
+                        onChange={changeEventState}
+                    />
+                </div>
+            </fieldset>
+            
+
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="max_capacity">Maximum Capacity: </label>
+                    <input type="text" name="max_capacity" required autoFocus className="form-control"
+                        value={currentEvent.max_capacity}
+                        onChange={changeEventState}
+                    />
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="image_url"> EVENT IMAGE URL: </label>
+                    <input type="text" name="image_url" autoFocus className="form-control"
+                        value={currentEvent.image_url}
+                        onChange={changeEventState}
                     />
                 </div>
             </fieldset>
@@ -92,19 +135,21 @@ export const EventForm = () => {
                     // Prevent form from being submitted
                     evt.preventDefault()
 
-                    const book = {
-                        title: currentBook.title,
-                        author: currentBook.author,
-                        released_date: currentBook.released_date,
-                        length: currentBook.length,
-                        description: currentBook.description,
-                        book_genre: currentBook.book_genre,
-                        image_url: currentBook.image_url
+                    const event = {
+                        event_name: currentEvent.event_name,
+                        location: currentEvent.location,
+                        date_of_event: currentEvent.date_of_event,
+                        start_time: currentEvent.start_time,
+                        end_time: currentEvent.end_time,
+                        max_capacity: currentEvent.max_capacity,
+                        book: currentEvent.book,
+                        organizing_reader:"",
+                        image_url: currentEvent.image_url
                     }
 
                     // Send POST request to your API
-                    createBook(book)
-                        .then(() => navigate("/books"))
+                    createEvent(event)
+                        .then(() => navigate("/events"))
                 }}
                 className="btn btn-primary">Create</button>
         </form>
