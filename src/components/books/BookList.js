@@ -64,11 +64,17 @@ export const BookList = (props) => {
                     <Typography> Author: {book?.author} </Typography>
                     <Typography> Genre: {book?.book_genre?.label}</Typography>
                     <Stack direction="row" justifyContent="center">
+
+                    {book.creator === true
+                        ? <>
                         <Button className="button" variant="contained" onClick={() => {
                             navigate(`edit/${book.id}`)
                         }}>Edit</Button>
                         <Button className="button" variant="contained" onClick={() => {handleDelete(book.id)
                         }}>Delete</Button>
+                        </>
+                        : ("")
+                    }    
                     </Stack>
                 </Stack>
             </CardContent>

@@ -39,7 +39,7 @@ export const createEvent = (event) => {
         .then(response => response.json())
 }
 
-export const updateEvent = (event, id) => {
+export const updateEvent = (event,id) => {
     return fetch(`http://localhost:8000/events/${id}`, {
         method: "PUT",
         headers:{
