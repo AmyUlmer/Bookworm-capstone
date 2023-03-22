@@ -20,6 +20,7 @@ export const EventList = (props) => {
         deleteEvent(id).then(refreshPage)
     }   
 
+
     return (
         <article className="events">
             <button className="btn btn-2 icon-create"
@@ -39,19 +40,20 @@ export const EventList = (props) => {
                         <div className="event__time">Time: {event.start_time}-{event.end_time}</div>
                         <div className="event__organizer">Event Organizer: {event?.organizing_reader?.full_name}</div>
                         <div className="event__capacity">Maximum Capacity: {event.max_capacity}</div>
-                        <div className="event__footer">
-                            <button className="btn btn-2 btn-sep icon-create"
+
+                        {event.creator
+                        ? <>
+                            <button className="edit_button"
                                 onClick={() => {
                                     navigate({ pathname: `edit/${event.id}` })
                                     }}>Edit</button>
-                        </div>
-                        <div className="event__footer">
-                            <button
+                        
+                            <button className="delete_button"
                                 onClick={() => {
                                     handleClick(event.id)
                                 }}>Delete</button>
-                            {
-                                event.joined 
+                            </>
+                            : event.joined 
                                 ?
                                     <button
                                     onClick={() => {
@@ -69,7 +71,7 @@ export const EventList = (props) => {
                                         })
                                     }}>Join</button>
                             }
-                        </div>
+                        
                     </section>
                 })
             }
