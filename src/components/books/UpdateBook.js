@@ -11,12 +11,14 @@ import { getBookById, getBookGenres, updateBook } from '../../managers/BookManag
 
 export const UpdateBook = () => {
     const navigate = useNavigate()
+    
     const [bookGenres, setBookGenres] = useState([
         {
             id: 0
         } 
     ])
 
+    
     const { bookId } = useParams()
 
     /*
@@ -30,10 +32,12 @@ export const UpdateBook = () => {
         released_date: "",
         length: "",
         description: "",
-        book_genre: {},
+        book_genre: {id:0},
         reader:{},
         image_url: ""
     })
+
+    const [selectedGenre_id, setGenre] =useState(currentBook.book_genre.id)
 
     useEffect(() => {
         // TODO: Get the book genres, then set the state
@@ -84,13 +88,12 @@ export const UpdateBook = () => {
                         name="label"
                         className="form-control"
                         
-                        value={currentBook.book_genre.id}
+                        defaultValue={currentBook.book_genre.id}
                         onChange={(event) => {
-                            const copy = { ...currentBook }
-                            copy.book_genre = parseInt(event.target.value)
-                            setCurrentBook(copy)
+                            setGenre(event.target.value)
+                            
                         }}>
-                        <option value="0">Choose:</option>
+                        {/* <option value="0">Please Choose Book</option> */}
                         {bookGenres.map(genre => ( 
                                     <option key={`book_genre--${genre.id}`} value={genre.id} name={genre.label}>{genre.label}</option>                         
                             ))}
@@ -154,12 +157,12 @@ export const UpdateBook = () => {
                         released_date: currentBook.released_date,
                         length: currentBook.length,
                         description: currentBook.description,
-                        book_genre: currentBook.book_genre,
+                        book_genre: selectedGenre_id,
                         image_url: currentBook.image_url
                     }
 
                     // Send POST request to your API
-                    updateBook(book)
+                    updateBook(book,bookId)
                         .then(() => navigate("/books"))
                 }}
                 className="btn btn-primary">SAVE BOOK EDITS</button>

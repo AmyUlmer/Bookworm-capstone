@@ -19,15 +19,18 @@ export const UpdateEvent = () => {
             start_time: "",
             end_time: "",
             max_capacity: "",
-            book: {},
+            book: {id:0},
             organizing_reader:"",
             image_url: ""
     })
+
+    const [selectedBook_id, setBook] =useState()
 
     useEffect(() => {
         // TODO: Get the eventById then set the state
         getEventById(eventId).then((data) => {
             setCurrentEvent(data)
+            setBook(data.book.id)
         })
         getBooks().then(res => setBooks(res))
     }, [eventId])
@@ -62,11 +65,9 @@ export const UpdateEvent = () => {
                                 className="form-control"
                                 value={currentEvent.book.id}
                                 onChange={(event) => {
-                                    const copy = { ...currentEvent }
-                                    copy.book = parseInt(event.target.value)
-                                    setCurrentEvent(copy)
+                                    setBook(event.target.value)
                                 }}>
-                                <option value="0">Please Choose Book</option>
+                                {/* <option value="0">Please Choose Book</option> */}
                                 {books.map(book => ( 
                                             <option key={`book--${book.id}`} value={book.id} name={book.title}>{book.title}</option>                         
                                     ))}
@@ -154,13 +155,13 @@ export const UpdateEvent = () => {
                         start_time: currentEvent.start_time,
                         end_time: currentEvent.end_time,
                         max_capacity: currentEvent.max_capacity,
-                        book: currentEvent.book,
+                        book: selectedBook_id,
                         organizing_reader:"",
                         image_url: currentEvent.image_url
                     }
 
                     // Send POST request to your API
-                    updateEvent(eventId,event)
+                    updateEvent(event,eventId)
                         .then(() => navigate("/events"))
                 }}
                 className="btn btn-primary">SAVE EVENT EDITS</button>
