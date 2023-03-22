@@ -67,7 +67,8 @@ export const BookList = (props) => {
                         <Button className="button" variant="contained" onClick={() => {
                             navigate(`edit/${book.id}`)
                         }}>Edit</Button>
-                        <Button className="button" variant="contained" onClick={handleDelete}>Delete</Button>
+                        <Button className="button" variant="contained" onClick={() => {handleDelete(book.id)
+                        }}>Delete</Button>
                     </Stack>
                 </Stack>
             </CardContent>

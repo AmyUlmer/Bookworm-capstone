@@ -8,7 +8,7 @@ export const BookForm = () => {
     const [bookGenres, setBookGenres] = useState([])
 
     const [currentBook, setCurrentBook] = useState({
-            id:0,
+            // id:0,
             author: "",
             title: "",
             released_date: "",
@@ -76,7 +76,7 @@ export const BookForm = () => {
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="length">NUMBER OF PAGES: </label>
+                    <label htmlFor="length">LENGTH: </label>
                     <input type="text" name="length" required autoFocus className="form-control"
                         value={currentBook.length}
                         onChange={changeBookState}
@@ -90,6 +90,17 @@ export const BookForm = () => {
                     <input type="date" name="released_date" required autoFocus className="form-control"
                         value={currentBook.released_date}
                         onChange={changeBookState}
+                    />
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="description">DESCRIPTION: </label>
+                    <textarea name="description" required autoFocus className="form-control"
+                        value={currentBook.description}
+                        onChange={changeBookState}
+                        rows="5"
                     />
                 </div>
             </fieldset>

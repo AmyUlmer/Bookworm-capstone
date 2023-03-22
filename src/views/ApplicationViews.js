@@ -10,6 +10,7 @@ import { UpdateBook } from '../components/books/UpdateBook';
 import { BookDetails } from '../components/books/BookDetails';
 import { EventForm } from '../components/events/EventForm';
 import { EventList } from '../components/events/EventList';
+import { UpdateEvent } from '../components/events/UpdateEvent';
 
 
 export const ApplicationViews = () => {
@@ -22,6 +23,7 @@ export const ApplicationViews = () => {
                 <Route path="/events" >
                     <Route index element={<EventList />} />
                     <Route path="new" element={<EventForm />} />
+                    <Route path="edit/:eventId" element={<UpdateEvent />} />
                 </Route>
                 <Route path="/books" >
                     <Route index element={<BookList />} />

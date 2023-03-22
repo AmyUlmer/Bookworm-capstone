@@ -7,7 +7,6 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import Stack from '@mui/material/Stack'
-import Button from '@mui/material/Button'
 import "./book.css"
 
 export const BookDetails = () => {
@@ -33,6 +32,7 @@ export const BookDetails = () => {
                     <Typography className="book__title"> TITLE: {book?.title}</Typography>
                     <Typography className="book__author"> AUTHOR: {book?.author}</Typography>
                     <Typography className="book__genre"> GENRE: {book?.book_genre?.label}</Typography>
+                    <Typography className="book__released_date"> RELEASED DATE: {book?.released_date}</Typography>
                     <Typography className="book__description"> DESCRIPTION: {book?.description}</Typography>
                     <Typography className="book__length">LENGTH: {book.length} pages </Typography>
                 </Stack>

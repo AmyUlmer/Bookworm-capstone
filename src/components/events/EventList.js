@@ -32,11 +32,13 @@ export const EventList = (props) => {
                     return <section key={`event--${event.id}`} className="event">
                         
                         <img src={`${event.image_url}`} alt="Event" className="event__imageURL"></img>
-                        <div className="event__name">Name: {event.event_name}</div>
-                        <div className="event__game">Book: {event.book.title}</div>
+                        <div className="event__name">Event: {event?.event_name}</div>
+                        <div className="event__book">Book: {event?.book?.title}</div>
                         <div className="event_location">Location: {event.location}</div>
-                        <div className="event_date">Date: {event.date_of_event} at {event.start_time}</div>
-                        <div className="event__organizer">Event Organizer: {event.organizing_reader.full_name}</div>
+                        <div className="event__date">Date: {event.date_of_event}</div>
+                        <div className="event__time">Time: {event.start_time}-{event.end_time}</div>
+                        <div className="event__organizer">Event Organizer: {event?.organizing_reader?.full_name}</div>
+                        <div className="event__capacity">Maximum Capacity: {event.max_capacity}</div>
                         <div className="event__footer">
                             <button className="btn btn-2 btn-sep icon-create"
                                 onClick={() => {
